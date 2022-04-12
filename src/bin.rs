@@ -89,7 +89,7 @@ fn delete_site(site_name: &RawStr) -> ApiResponse {
             status: Status::Created,
         },
         _ => ApiResponse {
-            json: json!({"error": "Building not found"}),
+            json: json!({"error": "Site not found"}),
             status: Status::NotFound,
         },
     }
