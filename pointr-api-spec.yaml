@@ -96,6 +96,13 @@ paths:
       operationId: createSiteBuilding
       tags:
         - sites
+      parameters:
+        - name: siteName
+          in: path
+          required: true
+          description: the name of the site
+          schema:
+            type: string
       requestBody:
         description: List of building objects
         content:
@@ -162,6 +169,19 @@ paths:
       operationId: createLevelForSiteBuilding
       tags:
         - sites
+      parameters:
+        - name: siteName
+          in: path
+          required: true
+          description: The name of the site
+          schema:
+            type: string
+        - name: buildingName
+          in: path
+          required: true
+          description: The name of the site building
+          schema:
+            type: string
       requestBody:
         description: List of level objects
         content:
