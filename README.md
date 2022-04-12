@@ -49,3 +49,66 @@ Now you are ready to send some requests to the server!
 `GET /v1/sites`
 
 Retrieves all the sites in the database.
+```
+$ curl http://localhost:8000/v1/sites
+```
+
+Returns a JSON array of site objects
+
+Example:
+```
+[
+    {
+        "name": "West Wing",
+        "buildings": [
+            {
+                "name": "Block A",
+                "levels": [
+                    {
+                        "name": "Level 1"
+                    },
+                    {
+                        "name": "Level 2"
+                    },
+                    {
+                        "name": "Level 3"
+                    },
+                    {
+                        "name": "Level 4"
+                    },
+                    {
+                        "name": "Level 5"
+                    }
+                ]
+            },
+            {
+                "name": "Block B",
+                "levels": [
+                    {
+                        "name": "Level 1"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "East Wing",
+        "buildings": [
+            {
+                "name": "Block B",
+                "levels": [
+                    {
+                        "name": "Level 1"
+                    },
+                    {
+                        "name": "Level 2"
+                    },
+                    {
+                        "name": "Level 3"
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
