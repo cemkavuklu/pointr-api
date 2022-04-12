@@ -1,0 +1,25 @@
+[package]
+name = "pointr-api"
+version = "0.1.0"
+authors = ["Cem Kavuklu <cemkavuklu@protonmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pointr-api"
+path = "src/bin.rs"
+
+[dependencies]
+rocket = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[dependencies.rocket_contrib]
+version = "0.4"
+default-features = false
+features = ["json"]
