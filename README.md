@@ -18,6 +18,8 @@ All endpoints in this API are related to `sites` at the lowest level. The reason
   
 In the light of above statements, the base URL for the API is `/v1/sites/`. Here `v1` denotes the semantic version.
 
+This project uses a plain JSON file as a mock database. This is done simply to reduce the development time of the server. 
+
 ## Running the API Server
 To run the API Server, simply navigate into the folder you cloned the repo into, and run the following command in a terminal window (without the `$` symbol):
 ```
