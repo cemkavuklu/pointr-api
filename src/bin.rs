@@ -48,13 +48,13 @@ fn rocket() -> rocket::Rocket {
 }
 
 // Retrieve all sites
-#[get("/", format = "application/json")]
+#[get("/")]
 fn get_sites() -> Json<Option<Vec<Site>>> {
     Json(db::read_sites())
 }
 
 // Retrieve a single site
-#[get("/<name>", format = "application/json")]
+#[get("/<name>")]
 fn get_site(name: &RawStr) -> Json<Option<Site>> {
     Json(db::read_site(
         name.url_decode().expect("Failed to decode site name."),
@@ -62,7 +62,7 @@ fn get_site(name: &RawStr) -> Json<Option<Site>> {
 }
 
 // Import single site or multiple sites
-#[post("/", data = "<sites>", format = "application/json")]
+#[post("/", data = "<sites>")]
 fn create_sites(sites: Json<Vec<Site>>) -> ApiResponse {
     let is_created = db::insert_sites(sites.to_vec());
 
@@ -79,7 +79,7 @@ fn create_sites(sites: Json<Vec<Site>>) -> ApiResponse {
 }
 
 // Delete a site
-#[delete("/<site_name>", format = "application/json")]
+#[delete("/<site_name>")]
 fn delete_site(site_name: &RawStr) -> ApiResponse {
     let is_removed = db::delete_site(site_name.url_decode().expect("Failed to decode site name."));
 
@@ -96,7 +96,7 @@ fn delete_site(site_name: &RawStr) -> ApiResponse {
 }
 
 // Retrieve all buildings of a site
-#[get("/<site_name>/buildings", format = "application/json")]
+#[get("/<site_name>/buildings")]
 fn get_site_buildings(site_name: &RawStr) -> Json<Option<Vec<Building>>> {
     Json(db::read_site_buildings(
         site_name.url_decode().expect("Failed to decode site name."),
@@ -104,7 +104,7 @@ fn get_site_buildings(site_name: &RawStr) -> Json<Option<Vec<Building>>> {
 }
 
 // Retrieve a single building of a site
-#[get("/<site_name>/buildings/<building_name>", format = "application/json")]
+#[get("/<site_name>/buildings/<building_name>")]
 fn get_site_building(site_name: &RawStr, building_name: &RawStr) -> Json<Option<Building>> {
     Json(db::read_site_building(
         site_name.url_decode().expect("Failed to decode site name."),
@@ -115,11 +115,7 @@ fn get_site_building(site_name: &RawStr, building_name: &RawStr) -> Json<Option<
 }
 
 // Add building to a site
-#[post(
-    "/<site_name>/buildings",
-    format = "application/json",
-    data = "<buildings>"
-)]
+#[post("/<site_name>/buildings", data = "<buildings>")]
 fn add_buildings_to_site(site_name: &RawStr, buildings: Json<Vec<Building>>) -> ApiResponse {
     let is_created = db::add_buildings_to_site(
         site_name.url_decode().expect("Failed to decode site name."),
@@ -139,7 +135,7 @@ fn add_buildings_to_site(site_name: &RawStr, buildings: Json<Vec<Building>>) -> 
 }
 
 // Remove a building from a site
-#[delete("/<site_name>/buildings/<building_name>", format = "application/json")]
+#[delete("/<site_name>/buildings/<building_name>")]
 fn delete_building_from_site(site_name: &RawStr, building_name: &RawStr) -> ApiResponse {
     let is_removed = db::remove_building_from_site(
         site_name.url_decode().expect("Failed to decode site name."),
@@ -161,11 +157,7 @@ fn delete_building_from_site(site_name: &RawStr, building_name: &RawStr) -> ApiR
 }
 
 // Add single level or multiple levels to a building of a site
-#[post(
-    "/<site_name>/buildings/<building_name>/levels",
-    format = "application/json",
-    data = "<levels>"
-)]
+#[post("/<site_name>/buildings/<building_name>/levels", data = "<levels>")]
 fn add_levels_to_site_building(
     site_name: &RawStr,
     building_name: &RawStr,
