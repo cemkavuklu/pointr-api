@@ -7,6 +7,26 @@ The specification can be viewed with [Swagger Editor](https://editor.swagger.io/
 
 Simply copy and paste the contents of the spec file into the Swagger Editor.
 
+## Table of Contents
+
+- [Pointr API](#pointr-api)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Assumptions for the Case Study](#assumptions-for-the-case-study)
+  - [Running the API Server](#running-the-api-server)
+  - [Endpoints](#endpoints)
+    - [Base URL](#base-url)
+    - [Import Sites](#import-sites)
+    - [Retrieve all Sites](#retrieve-all-sites)
+    - [Retrieve Existing Site](#retrieve-existing-site)
+    - [Delete a Site](#delete-a-site)
+    - [Import Buildings](#import-buildings)
+    - [Retrieve All Buildings of a Site](#retrieve-all-buildings-of-a-site)
+    - [Retrieve a Building of a Site](#retrieve-a-building-of-a-site)
+    - [Delete a Building from a Site](#delete-a-building-from-a-site)
+    - [Import a single level or multiple levels](#import-a-single-level-or-multiple-levels)
+  - [Testing](#testing)
+
 ## Installation
 The only requirement to run the API server is the [Rust Language Toolchain](https://www.rust-lang.org).
 
@@ -56,7 +76,7 @@ Now you are ready to send some requests to the server!
 `/v1/sites`
 
 This is the base URL common to all endpoints in the API.
-### Create Sites
+### Import Sites
 `POST /`
 
 Imports a single site or multiple sites.
