@@ -54,10 +54,10 @@ fn get_sites() -> Json<Option<Vec<Site>>> {
 }
 
 // Retrieve a single site
-#[get("/<name>")]
-fn get_site(name: &RawStr) -> Json<Option<Site>> {
+#[get("/<site_name>")]
+fn get_site(site_name: &RawStr) -> Json<Option<Site>> {
     Json(db::read_site(
-        name.url_decode().expect("Failed to decode site name."),
+        site_name.url_decode().expect("Failed to decode site name."),
     ))
 }
 
