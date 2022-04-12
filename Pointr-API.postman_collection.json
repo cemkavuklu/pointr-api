@@ -1,0 +1,518 @@
+{
+	"info": {
+		"_postman_id": "e9dd065e-7ecb-44f6-835c-3f7a902ec716",
+		"name": "Pointr-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Import Site",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"Import successful\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\": \"North Wing\",\n        \"buildings\": [\n            {\n                \"name\": \"Block 1\",\n                \"levels\": [\n                    {\n                        \"name\": \"Level A\"\n                    },\n                    {\n                        \"name\": \"Level B\"\n                    },\n                    {\n                        \"name\": \"Level C\"\n                    },\n                    {\n                        \"name\": \"Level D\"\n                    },\n                    {\n                        \"name\": \"Level E\"\n                    }\n                ]\n            },\n            {\n                \"name\": \"Block 2\",\n                \"levels\": [\n                    {\n                        \"name\": \"Level A1\"\n                    }\n                ]\n            }\n        ]\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/sites/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve All Sites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body should include site name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    for (site in jsonData) {",
+							"        pm.expect(jsonData[site].name).to.exist;",
+							"    }",
+							"});",
+							"pm.test(\"Body should include buildings\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    for (site in jsonData) {",
+							"        pm.expect(jsonData[site].buildings).to.exist;",
+							"        pm.expect(jsonData[site].buildings).to.be.an('array');",
+							"    }",
+							"});",
+							"pm.test(\"Body should include building levels\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    for (i in jsonData) {",
+							"        for (j in jsonData[i].buildings) {",
+							"            pm.expect(jsonData[i].buildings[j].levels).to.exist;",
+							"            pm.expect(jsonData[i].buildings[j].levels).to.be.an('array');",
+							"        }",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/v1/sites/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Existing Site",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Body should include site name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.exist;",
+							"});",
+							"pm.test(\"Body should include buildings\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.buildings).to.exist;",
+							"    pm.expect(jsonData.buildings).to.be.an('array');",
+							"});",
+							"pm.test(\"Body should include building levels\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.buildings[0].levels).to.exist;",
+							"    pm.expect(jsonData.buildings[0].levels).to.be.an('array');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/v1/sites/West Wing",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						"West Wing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Site",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 404]);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Proper response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if (jsonData.error) {",
+							"        pm.expect(jsonData.error).to.eql(\"Site not found\");",
+							"    }",
+							"    if (jsonData.status) {",
+							"        pm.expect(jsonData.status).to.eql(\"Delete successful\");",
+							"    }",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/v1/sites/North Wing",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						"North Wing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import Buildings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							"pm.test(\"Successful Import\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"Import successful\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\": \"New Block 1\",\n        \"levels\": [\n            {\n                \"name\": \"Level A\"\n            },\n            {\n                \"name\": \"Level B\"\n            },\n            {\n                \"name\": \"Level C\"\n            },\n            {\n                \"name\": \"Level D\"\n            },\n            {\n                \"name\": \"Level E\"\n            }\n        ]\n    },\n    {\n        \"name\": \"New Block 2\",\n        \"levels\": [\n            {\n                \"name\": \"Level A1\"\n            }\n        ]\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/sites/West Wing/buildings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						"West Wing",
+						"buildings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve all Buildings of a Site",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body should include building names\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    for (i in jsonData) {",
+							"        pm.expect(jsonData[i].name).to.exist;",
+							"    }",
+							"});",
+							"pm.test(\"Body should include all building levels\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    for (i in jsonData) {",
+							"        pm.expect(jsonData[i].levels).to.exist;",
+							"        pm.expect(jsonData[i].levels).to.be.an('array');",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/v1/sites/West Wing/buildings/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						"West Wing",
+						"buildings",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve a Building of a Site",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body should include building name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.exist;",
+							"});",
+							"pm.test(\"Body should include building levels\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.levels).to.exist;",
+							"    pm.expect(jsonData.levels).to.be.an('array');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/v1/sites/West Wing/buildings/Block A",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						"West Wing",
+						"buildings",
+						"Block A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Building",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 404]);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"pm.test(\"Proper response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if (jsonData.error) {",
+							"        pm.expect(jsonData.error).to.eql(\"Building not found\");",
+							"    }",
+							"    if (jsonData.status) {",
+							"        pm.expect(jsonData.status).to.eql(\"Delete successful\");",
+							"    }",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/sites/West Wing/buildings/New Block 2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						"West Wing",
+						"buildings",
+						"New Block 2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import Levels",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							"pm.test(\"Success message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"Import successful\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\": \"Level something\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/sites/West Wing/buildings/Block A/levels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"sites",
+						"West Wing",
+						"buildings",
+						"Block A",
+						"levels"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
