@@ -1,0 +1,218 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Pointr API
+servers:
+  - url: http://localhost:8000/v1
+paths:
+  /sites:
+    get:
+      summary: List all sites
+      operationId: listSites
+      tags:
+        - sites
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Sites"
+    post:
+      summary: Import a single site or multiple sites
+      operationId: createSites
+      tags:
+        - sites
+      requestBody:
+        description: List of site objects
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Sites"
+      responses:
+        201:
+          description: Created
+        422:
+          description: Unprocessable Entity
+  /sites/{siteName}:
+    get:
+      summary: Info for a specific site
+      operationId: getSiteByName
+      tags:
+        - sites
+      parameters:
+        - name: siteName
+          in: path
+          required: true
+          description: The name of the site to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Site"
+    delete:
+      summary: Delete a site
+      operationId: deleteSite
+      tags:
+        - sites
+      parameters:
+        - name: siteName
+          in: path
+          required: true
+          description: The name of the site to be deleted
+          schema:
+            type: string
+      responses:
+        201:
+          description: Created
+        404:
+          description: Not found
+  /sites/{siteName}/buildings:
+    get:
+      summary: Retrieve all buildings of a site
+      operationId: getSiteBuildings
+      tags:
+        - sites
+      parameters:
+        - name: siteName
+          in: path
+          required: true
+          description: The name of the site
+          schema:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Buildings"
+    post:
+      summary: Import a single building or multiple buildings into a site
+      operationId: createSiteBuilding
+      tags:
+        - sites
+      requestBody:
+        description: List of building objects
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Buildings"
+      responses:
+        201:
+          description: Created
+        422:
+          description: Unprocessable Entity
+  /sites/{siteName}/buildings/{buildingName}:
+    get:
+      summary: Retrieve a building of a site
+      operationId: getSiteBuilding
+      tags:
+        - sites
+      parameters:
+        - name: siteName
+          in: path
+          required: true
+          description: The name of the site
+          schema:
+            type: string
+        - name: buildingName
+          in: path
+          required: true
+          description: The name of the site building
+          schema:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Building"
+    delete:
+      summary: Delete a building from a site
+      operationId: deleteSiteBuilding
+      tags:
+        - sites
+      parameters:
+        - name: siteName
+          in: path
+          required: true
+          description: The name of the site
+          schema:
+            type: string
+        - name: buildingName
+          in: path
+          required: true
+          description: The name of the site building
+          schema:
+            type: string
+      responses:
+        201:
+          description: Created
+        404:
+          description: Not found
+  /sites/{siteName}/buildings/{buildingName}/levels:
+    post:
+      summary: Import a single level or multiple levels into a building of a site
+      operationId: createLevelForSiteBuilding
+      tags:
+        - sites
+      requestBody:
+        description: List of level objects
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Levels"
+      responses:
+        201:
+          description: Created
+        422:
+          description: Unprocessable Entity
+
+components:
+  schemas:
+    Site:
+      required:
+        - name
+        - buildings
+      properties:
+        name:
+          type: string
+        buildings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Building"
+    Sites:
+      type: array
+      items:
+        $ref: "#/components/schemas/Site"
+    Building:
+      required:
+        - name
+        - levels
+      properties:
+        name:
+          type: string
+        levels:
+          type: array
+          items:
+            $ref: "#/components/schemas/Level"
+    Buildings:
+      type: array
+      items:
+        $ref: "#/components/schemas/Building"
+    Level:
+      required:
+        - name
+      properties:
+        name:
+          type: string
+    Levels:
+      type: array
+      items:
+        $ref: "#/components/schemas/Level"
