@@ -1,6 +1,14 @@
 # Pointr API
 This repo contains an API for the Pointr Case Study.
 
+You can find the OpenAPI specification for this API [here](pointr-api-spec.yaml).
+
+The specification can be viewed with [Swagger Editor](https://editor.swagger.io/).
+
+Simply copy and paste the contents of the spec file into the Swagger Editor.
+
+
+
 ## Installation
 The only requirement to run the API server is the [Rust Language Toolchain](https://www.rust-lang.org).
 
@@ -93,7 +101,7 @@ $ curl --location --request POST 'http://localhost:8000/v1/sites/' \
 ]'
 ```
 
-Returns response message with a status code of `HTTP 201` or `HTTP 422`
+Returns response message with a status code of `HTTP 201` or `HTTP 422`.
 
 Example Response for `HTTP 201`:
 ```
@@ -110,7 +118,7 @@ Retrieves all the sites in the database.
 $ curl http://localhost:8000/v1/sites
 ```
 
-Returns a JSON array of site objects
+Returns a JSON array of site objects.
 
 Example Response:
 ```
