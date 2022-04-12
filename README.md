@@ -41,3 +41,9 @@ Mounting /v1/sites:
 ```
 
 Now you are ready to send some requests to the server!
+
+## Endpoints
+### Retrieve all Sites
+`GET /v1/sites`
+
+Retrieves all the sites in the database.
