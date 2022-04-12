@@ -49,13 +49,14 @@ Now you are ready to send some requests to the server!
 `GET /v1/sites`
 
 Retrieves all the sites in the database.
+
 ```
 $ curl http://localhost:8000/v1/sites
 ```
 
 Returns a JSON array of site objects
 
-Example:
+Example Response:
 ```
 [
     {
@@ -112,3 +113,79 @@ Example:
     }
 ]
 ```
+
+### Retrieve a single site
+`GET /v1/sites/<site_name>`
+
+Retrieves a single site.
+```
+$ curl http://localhost:8000/v1/sites/West%20Wing
+```
+
+Returns a JSON object for a single site.
+
+Example Response:
+```
+{
+    "name": "West Wing",
+    "buildings": [
+        {
+            "name": "Block A",
+            "levels": [
+                {
+                    "name": "Level 1"
+                },
+                {
+                    "name": "Level 2"
+                },
+                {
+                    "name": "Level 3"
+                },
+                {
+                    "name": "Level 4"
+                },
+                {
+                    "name": "Level 5"
+                }
+            ]
+        },
+        {
+            "name": "Block B",
+            "levels": [
+                {
+                    "name": "Level 1"
+                }
+            ]
+        },
+        {
+            "name": "New Block 1",
+            "levels": [
+                {
+                    "name": "Level A"
+                },
+                {
+                    "name": "Level B"
+                },
+                {
+                    "name": "Level C"
+                },
+                {
+                    "name": "Level D"
+                },
+                {
+                    "name": "Level E"
+                }
+            ]
+        },
+        {
+            "name": "New Block 2",
+            "levels": [
+                {
+                    "name": "Level A1"
+                }
+            ]
+        }
+    ]
+}
+```
+
