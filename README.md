@@ -17,3 +17,27 @@ All endpoints in this API are related to `sites` at the lowest level. The reason
 * The above assumption is also valid for a level. A level belongs to a building and cannot exist as a standalone entity.
   
 In the light of above statements, the base URL for the API is `/v1/sites/`. Here `v1` denotes the semantic version.
+
+## Running the API Server
+To run the API Server, simply navigate into the folder you cloned the repo into, and run the following command in a terminal window (without the `$` symbol):
+```
+$ cargo run
+```
+
+This will build all the necessary dependencies and start the local server. After this step you should be able to see the following message in your terminal:
+```
+...
+Mounting /v1/sites:
+    => GET /v1/sites (get_sites)
+    => GET /v1/sites/<name> (get_site)
+    => POST /v1/sites (create_sites)
+    => DELETE /v1/sites/<site_name> (delete_site)
+    => GET /v1/sites/<site_name>/buildings (get_site_buildings)
+    => GET /v1/sites/<site_name>/buildings/<building_name> (get_site_building)
+    => POST /v1/sites/<site_name>/buildings (add_buildings_to_site)
+    => DELETE /v1/sites/<site_name>/buildings/<building_name> (delete_building_from_site)
+    => POST /v1/sites/<site_name>/buildings/<building_name>/levels (add_levels_to_site_building)
+🚀 Rocket has launched from http://localhost:8000
+```
+
+Now you are ready to send some requests to the server!
