@@ -7,8 +7,6 @@ The specification can be viewed with [Swagger Editor](https://editor.swagger.io/
 
 Simply copy and paste the contents of the spec file into the Swagger Editor.
 
-
-
 ## Installation
 The only requirement to run the API server is the [Rust Language Toolchain](https://www.rust-lang.org).
 
@@ -55,10 +53,11 @@ Now you are ready to send some requests to the server!
 ## Endpoints
 
 ### Base URL
-#### `/v1/sites`
+`/v1/sites`
+
 This is the base URL common to all endpoints in the API.
 ### Create Sites
-#### `POST /`
+`POST /`
 
 Imports a single site or multiple sites.
 ```
@@ -110,7 +109,7 @@ Example Response for `HTTP 201`:
 }
 ```
 ### Retrieve all Sites
-#### `GET /`
+`GET /`
 
 Retrieves all the sites in the database.
 
@@ -179,7 +178,8 @@ Example Response:
 ```
 
 ### Retrieve Existing Site
-#### `GET /<site_name>`
+
+`GET /<site_name>`
 
 Retrieves a single site.
 ```
@@ -254,7 +254,9 @@ Example Response:
 ```
 
 ### Delete a Site
-#### `DELETE /<site_name>`
+
+`DELETE /<site_name>`
+
 Removes a building from a site.
 ```
 $ curl --request DELETE 'localhost:8000/v1/sites/North Wing'
@@ -275,8 +277,10 @@ Example Response for `HTTP 404`:
 ```
 
 ### Import Buildings
-#### `POST /<site_name>/buildings`
+`POST /<site_name>/buildings`
+
 Imports a single building or multiple buildings into a site.
+
 ```
 $ curl --location --request POST 'http://localhost:8000/v1/sites/West Wing/buildings' \
 --header 'Content-Type: application/json' \
@@ -321,8 +325,10 @@ Example Response for `HTTP 201`:
 ```
 
 ### Retrieve All Buildings of a Site
-#### `GET /<site_name>/buildings`
+`GET /<site_name>/buildings`
+
 List all buildings within a site.
+
 ```
 $ curl --location --request GET 'localhost:8000/v1/sites/West Wing/buildings/'
 ```
@@ -361,7 +367,8 @@ Example Response:
 ```
 
 ### Retrieve a Building of a Site
-#### `GET /<site_name>/buildings/<building_name>`
+`GET /<site_name>/buildings/<building_name>`
+
 List a single building by name within a site.
 ```
 $ curl --location --request GET 'localhost:8000/v1/sites/West Wing/buildings/Block A'
@@ -391,8 +398,11 @@ Example Response:
 ```
 
 ### Delete a Building from a Site
-#### `DELETE /<site_name>/buildings/<building_name>`
+
+`DELETE /<site_name>/buildings/<building_name>`
+
 Removes a building from a site.
+
 ```
 $ curl --location --request DELETE 'http://localhost:8000/v1/sites/West Wing/buildings/New Block 2'
 ```
@@ -412,7 +422,11 @@ Example Response for `HTTP 404`:
 ```
 
 ### Import a single level or multiple levels
-#### `POST /<site_name>/buildings/<building_name>/levels`
+
+`POST /<site_name>/buildings/<building_name>/levels`
+
+Imports single or multiple levels into a building of a site.
+
 ```
 $ curl --location --request POST 'http://localhost:8000/v1/sites/West Wing/buildings/Block A/levels' \
 --header 'Content-Type: application/json' \
@@ -430,3 +444,14 @@ Example Response for `HTTP 201`:
     "status": "Import successful"
 }
 ```
+
+## Testing
+All tests are automated via a [Postman Collection](Pointr-API.postman_collection.json).
+
+You can download Postman from [here](https://www.postman.com/downloads/).
+
+After the installation, in the Collections side tab, click on the `Import` button and upload the Collection's JSON file.
+
+All requests in the collection have tests in their respective Tests tabs.
+
+Also, all the test can be automatically run via [Postman's Collection Runner](https://learning.postman.com/docs/running-collections/intro-to-collection-runs/).
