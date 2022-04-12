@@ -45,8 +45,64 @@ Mounting /v1/sites:
 Now you are ready to send some requests to the server!
 
 ## Endpoints
+
+### Base URL
+#### `/v1/sites`
+This is the base URL common to all endpoints in the API.
+### Create Sites
+#### `POST /`
+
+Imports a single site or multiple sites.
+```
+$ curl --location --request POST 'http://localhost:8000/v1/sites/' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "name": "North Wing",
+        "buildings": [
+            {
+                "name": "Block 1",
+                "levels": [
+                    {
+                        "name": "Level A"
+                    },
+                    {
+                        "name": "Level B"
+                    },
+                    {
+                        "name": "Level C"
+                    },
+                    {
+                        "name": "Level D"
+                    },
+                    {
+                        "name": "Level E"
+                    }
+                ]
+            },
+            {
+                "name": "Block 2",
+                "levels": [
+                    {
+                        "name": "Level A1"
+                    }
+                ]
+            }
+        ]
+    }
+]'
+```
+
+Returns response message with a status code of `HTTP 201` or `HTTP 422`
+
+Example Response for `HTTP 201`:
+```
+{
+    "status": "Import successful"
+}
+```
 ### Retrieve all Sites
-`GET /v1/sites`
+#### `GET /`
 
 Retrieves all the sites in the database.
 
@@ -114,8 +170,8 @@ Example Response:
 ]
 ```
 
-### Retrieve a single site
-`GET /v1/sites/<site_name>`
+### Retrieve Existing Site
+#### `GET /<site_name>`
 
 Retrieves a single site.
 ```
@@ -189,3 +245,180 @@ Example Response:
 }
 ```
 
+### Delete a Site
+#### `DELETE /<site_name>`
+Removes a building from a site.
+```
+$ curl --request DELETE 'localhost:8000/v1/sites/North Wing'
+```
+Returns response message with a status code of `HTTP 201` or `HTTP 404`
+
+Example Response for `HTTP 201`:
+```
+{
+    "status": "Delete successful"
+}
+```
+Example Response for `HTTP 404`:
+```
+{
+    "error": "Site not found"
+}
+```
+
+### Import Buildings
+#### `POST /<site_name>/buildings`
+Imports a single building or multiple buildings into a site.
+```
+$ curl --location --request POST 'http://localhost:8000/v1/sites/West Wing/buildings' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "name": "New Block 1",
+        "levels": [
+            {
+                "name": "Level A"
+            },
+            {
+                "name": "Level B"
+            },
+            {
+                "name": "Level C"
+            },
+            {
+                "name": "Level D"
+            },
+            {
+                "name": "Level E"
+            }
+        ]
+    },
+    {
+        "name": "New Block 2",
+        "levels": [
+            {
+                "name": "Level A1"
+            }
+        ]
+    }
+]'
+```
+Returns response message with a status code of `HTTP 201` or `HTTP 422`
+
+Example Response for `HTTP 201`:
+```
+{
+    "status": "Import successful"
+}
+```
+
+### Retrieve All Buildings of a Site
+#### `GET /<site_name>/buildings`
+List all buildings within a site.
+```
+$ curl --location --request GET 'localhost:8000/v1/sites/West Wing/buildings/'
+```
+Example Response:
+```
+[
+    {
+        "name": "Block A",
+        "levels": [
+            {
+                "name": "Level 1"
+            },
+            {
+                "name": "Level 2"
+            },
+            {
+                "name": "Level 3"
+            },
+            {
+                "name": "Level 4"
+            },
+            {
+                "name": "Level 5"
+            }
+        ]
+    },
+    {
+        "name": "Block B",
+        "levels": [
+            {
+                "name": "Level 1"
+            }
+        ]
+    }
+]
+```
+
+### Retrieve a Building of a Site
+#### `GET /<site_name>/buildings/<building_name>`
+List a single building by name within a site.
+```
+$ curl --location --request GET 'localhost:8000/v1/sites/West Wing/buildings/Block A'
+```
+Example Response:
+```
+{
+    "name": "Block A",
+    "levels": [
+        {
+            "name": "Level 1"
+        },
+        {
+            "name": "Level 2"
+        },
+        {
+            "name": "Level 3"
+        },
+        {
+            "name": "Level 4"
+        },
+        {
+            "name": "Level 5"
+        }
+    ]
+}
+```
+
+### Delete a Building from a Site
+#### `DELETE /<site_name>/buildings/<building_name>`
+Removes a building from a site.
+```
+$ curl --location --request DELETE 'http://localhost:8000/v1/sites/West Wing/buildings/New Block 2'
+```
+Returns response message with a status code of `HTTP 201` or `HTTP 404`
+
+Example Response for `HTTP 201`:
+```
+{
+    "status": "Delete successful"
+}
+```
+Example Response for `HTTP 404`:
+```
+{
+    "error": "Building not found"
+}
+```
+
+### Import a single level or multiple levels
+#### `POST /<site_name>/buildings/<building_name>/levels`
+```
+$ curl --location --request POST 'http://localhost:8000/v1/sites/West Wing/buildings/Block A/levels' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "name": "New Level"
+    }
+]'
+```
+Returns response message with a status code of `HTTP 201` or `HTTP 422`
+
+Example Response for `HTTP 201`:
+```
+{
+    "status": "Import successful"
+}
+```
