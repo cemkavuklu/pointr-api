@@ -12,7 +12,7 @@ Simply copy and paste the contents of the spec file into the Swagger Editor.
 - [Sample Rust API](#sample-rust-api)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
-  - [Assumptions for the API](#assumptions-for-api)
+  - [Assumptions for the API](#assumptions-for-the-api)
   - [Running the API Server](#running-the-api-server)
   - [Endpoints](#endpoints)
     - [Base URL](#base-url)
