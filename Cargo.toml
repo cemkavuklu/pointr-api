@@ -1,5 +1,5 @@
 [package]
-name = "pointr-api"
+name = "sample-rust-api"
 version = "0.1.0"
 authors = ["Cem Kavuklu <cemkavuklu@protonmail.com>"]
 edition = "2021"
@@ -11,7 +11,7 @@ name = "lib"
 path = "src/lib.rs"
 
 [[bin]]
-name = "pointr-api"
+name = "sample-rust-api"
 path = "src/bin.rs"
 
 [dependencies]

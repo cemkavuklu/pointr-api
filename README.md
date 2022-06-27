@@ -1,7 +1,7 @@
-# Pointr API
-This repo contains an API for the Pointr Case Study.
+# Sample Rust API
+This repo contains a Sample API written in Rust
 
-You can find the OpenAPI specification for this API [here](pointr-api-spec.yaml).
+You can find the OpenAPI specification for this API [here](sample-rust-api-spec.yaml).
 
 The specification can be viewed with [Swagger Editor](https://editor.swagger.io/).
 
@@ -9,10 +9,10 @@ Simply copy and paste the contents of the spec file into the Swagger Editor.
 
 ## Table of Contents
 
-- [Pointr API](#pointr-api)
+- [Sample Rust API](#sample-rust-api)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
-  - [Assumptions for the Case Study](#assumptions-for-the-case-study)
+  - [Assumptions for the Case Study](#assumptions-for-api)
   - [Running the API Server](#running-the-api-server)
   - [Endpoints](#endpoints)
     - [Base URL](#base-url)
@@ -37,7 +37,7 @@ It can be installed from https://www.rust-lang.org/tools/install.
 
 After installing the Rust Toolchain, just clone this repo to a folder of your choice. And you are ready to go.
 
-## Assumptions for the Case Study
+## Assumptions for the API
 All endpoints in this API are related to `sites` at the lowest level. The reasoning behind this is as follows:
 * It is assumed that a building belongs to a site and cannot exist as a standalone entity. While this may not fit all real life use cases, it is enough for demonstration purposes.
 * The above assumption is also valid for a level. A level belongs to a building and cannot exist as a standalone entity.
