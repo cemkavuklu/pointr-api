@@ -466,7 +466,7 @@ Example Response for `HTTP 201`:
 ```
 
 ## Testing
-All tests are automated via a [Postman Collection](Pointr-API.postman_collection.json).
+All tests are automated via a [Postman Collection](Sample-Rust-API.postman_collection.json).
 
 You can download Postman from [here](https://www.postman.com/downloads/).
 
